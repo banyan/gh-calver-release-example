@@ -1,0 +1,14 @@
+name: Create Release PR
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Create release pull request
+      run: |
+        npx gh-calver-release create:pr --repo ${{ github.repository }} --base main --head develop
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
